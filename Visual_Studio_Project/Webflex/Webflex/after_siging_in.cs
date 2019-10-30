@@ -21,5 +21,10 @@ namespace Webflex
         {
 
         }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

@@ -14,9 +14,6 @@ namespace Webflex
     public partial class Webflex : Form
     {
 
-        string connetionString;
-        SqlConnection conn;
-
         public Webflex()
         {
             InitializeComponent();
@@ -35,6 +32,18 @@ namespace Webflex
         private void Webflex_Load(object sender, EventArgs e)
         {
             //todo 
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            sign_up_window ss = new sign_up_window();
+            ss.Show();
+        }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 

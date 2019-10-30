@@ -66,11 +66,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sign_up_window.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sign_up_window.Designer.cs">
+      <DependentUpon>sign_up_window.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="after_siging_in.resx">
       <DependentUpon>after_siging_in.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form1.en.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -87,6 +90,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="sign_up_window.resx">
+      <DependentUpon>sign_up_window.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
