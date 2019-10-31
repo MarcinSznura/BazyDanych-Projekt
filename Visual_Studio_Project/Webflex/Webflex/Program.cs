@@ -27,7 +27,7 @@ namespace Webflex
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Webflex());
+            Application.Run(new F_first_window());
 
         }
 

@@ -127,7 +127,7 @@ namespace Webflex
         private void Button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-           Webflex ss = new Webflex();
+           F_first_window ss = new F_first_window();
             ss.Show();
         }
     }

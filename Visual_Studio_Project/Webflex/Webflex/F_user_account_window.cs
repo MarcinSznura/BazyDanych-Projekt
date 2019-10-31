@@ -58,5 +58,14 @@ namespace Webflex
             F_account ss = new F_account();
             ss.Show();
         }
+
+        private void Button6_Click(object sender, EventArgs e)
+        {
+            Program.activeUserId = "";
+            Program.activeUserName = "";
+            this.Hide();
+            F_first_window ss = new F_first_window();
+            ss.Show();
+        }
     }
 }

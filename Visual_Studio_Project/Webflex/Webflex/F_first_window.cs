@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace Webflex
 {
-    public partial class Webflex : Form
+    public partial class F_first_window : Form
     {
 
-        public Webflex()
+        public F_first_window()
         {
             InitializeComponent();
         }
