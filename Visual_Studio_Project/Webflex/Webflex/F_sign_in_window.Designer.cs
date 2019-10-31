@@ -1,6 +1,6 @@
 ﻿namespace Webflex
 {
-    partial class login_screen
+    partial class F_sign_in_window
     {
         /// <summary>
         /// Required designer variable.

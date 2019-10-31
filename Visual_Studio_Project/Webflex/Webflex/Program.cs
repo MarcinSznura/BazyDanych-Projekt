@@ -8,15 +8,24 @@ namespace Webflex
 {
     static class Program
     {
+
+        public static string activeUserId="";
+        public static string activeUserName = "";
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
+
+        
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Webflex());
+            
         }
+
     }
+
 }

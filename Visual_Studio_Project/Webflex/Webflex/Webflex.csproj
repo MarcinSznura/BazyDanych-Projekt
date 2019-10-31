@@ -46,40 +46,76 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="after_siging_in.cs">
+    <Compile Include="F_account.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="after_siging_in.Designer.cs">
-      <DependentUpon>after_siging_in.cs</DependentUpon>
+    <Compile Include="F_account.Designer.cs">
+      <DependentUpon>F_account.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="F_add_funds.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="F_add_funds.Designer.cs">
+      <DependentUpon>F_add_funds.cs</DependentUpon>
     </Compile>
-    <Compile Include="login_screen.cs">
+    <Compile Include="F_shop.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="login_screen.Designer.cs">
-      <DependentUpon>login_screen.cs</DependentUpon>
+    <Compile Include="F_shop.Designer.cs">
+      <DependentUpon>F_shop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="F_user_account_window.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="F_user_account_window.Designer.cs">
+      <DependentUpon>F_user_account_window.cs</DependentUpon>
+    </Compile>
+    <Compile Include="F_first_window.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="F_first_window.Designer.cs">
+      <DependentUpon>F_first_window.cs</DependentUpon>
+    </Compile>
+    <Compile Include="F_sign_in_window.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="F_sign_in_window.Designer.cs">
+      <DependentUpon>F_sign_in_window.cs</DependentUpon>
+    </Compile>
+    <Compile Include="F_user_library.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="F_user_library.Designer.cs">
+      <DependentUpon>F_user_library.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="sign_up_window.cs">
+    <Compile Include="F_sign_up_window.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sign_up_window.Designer.cs">
-      <DependentUpon>sign_up_window.cs</DependentUpon>
+    <Compile Include="F_sign_up_window.Designer.cs">
+      <DependentUpon>F_sign_up_window.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="after_siging_in.resx">
-      <DependentUpon>after_siging_in.cs</DependentUpon>
+    <EmbeddedResource Include="F_account.resx">
+      <DependentUpon>F_account.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="F_add_funds.resx">
+      <DependentUpon>F_add_funds.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="login_screen.resx">
-      <DependentUpon>login_screen.cs</DependentUpon>
+    <EmbeddedResource Include="F_shop.resx">
+      <DependentUpon>F_shop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="F_user_account_window.resx">
+      <DependentUpon>F_user_account_window.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="F_first_window.resx">
+      <DependentUpon>F_first_window.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="F_sign_in_window.resx">
+      <DependentUpon>F_sign_in_window.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="F_user_library.resx">
+      <DependentUpon>F_user_library.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -90,8 +126,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="sign_up_window.resx">
-      <DependentUpon>sign_up_window.cs</DependentUpon>
+    <EmbeddedResource Include="F_sign_up_window.resx">
+      <DependentUpon>F_sign_up_window.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

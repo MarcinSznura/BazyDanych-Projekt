@@ -11,13 +11,13 @@ using System.Windows.Forms;
 
 namespace Webflex
 {
-    public partial class sign_up_window : Form
+    public partial class F_sign_up_window : Form
     {
 
         string connetionString;
         SqlConnection conn;
 
-        public sign_up_window()
+        public F_sign_up_window()
         {
             InitializeComponent();
         }
@@ -127,6 +127,11 @@ namespace Webflex
             this.Hide();
             Webflex ss = new Webflex();
             ss.Show();
+        }
+
+        private void F_sign_up_window_Load(object sender, EventArgs e)
+        {
+            CenterToParent();
         }
     }
 }

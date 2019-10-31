@@ -1,6 +1,6 @@
 ﻿namespace Webflex
 {
-    partial class sign_up_window
+    partial class F_sign_up_window
     {
         /// <summary>
         /// Required designer variable.
@@ -154,7 +154,7 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
-            // sign_up_window
+            // F_sign_up_window
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -172,8 +172,9 @@
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
-            this.Name = "sign_up_window";
+            this.Name = "F_sign_up_window";
             this.Text = "Sign up";
+            this.Load += new System.EventHandler(this.F_sign_up_window_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -19,25 +19,25 @@ namespace Webflex
             InitializeComponent();
         }
 
-       
+
 
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            login_screen ss = new login_screen();
+            F_sign_in_window ss = new F_sign_in_window();
             ss.Show();
 
         }
 
         private void Webflex_Load(object sender, EventArgs e)
         {
-            //todo 
+            CenterToParent();
         }
 
         private void Button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            sign_up_window ss = new sign_up_window();
+            F_sign_up_window ss = new F_sign_up_window();
             ss.Show();
         }
 

@@ -10,21 +10,23 @@ using System.Windows.Forms;
 
 namespace Webflex
 {
-    public partial class after_siging_in : Form
+    public partial class F_add_funds : Form
     {
-        public after_siging_in()
+        public F_add_funds()
         {
             InitializeComponent();
         }
 
-        private void After_siging_in_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void Button3_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Hide();
+            F_user_account_window ss = new F_user_account_window();
+            ss.Show();
+        }
+
+        private void F_add_funds_Load(object sender, EventArgs e)
+        {
+            CenterToParent();
         }
     }
 }
