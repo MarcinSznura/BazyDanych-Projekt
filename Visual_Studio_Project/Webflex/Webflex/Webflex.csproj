@@ -58,6 +58,12 @@
     <Compile Include="F_add_funds.Designer.cs">
       <DependentUpon>F_add_funds.cs</DependentUpon>
     </Compile>
+    <Compile Include="F_payment_window.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="F_payment_window.Designer.cs">
+      <DependentUpon>F_payment_window.cs</DependentUpon>
+    </Compile>
     <Compile Include="F_shop.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +107,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="F_add_funds.resx">
       <DependentUpon>F_add_funds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="F_payment_window.resx">
+      <DependentUpon>F_payment_window.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="F_shop.resx">
       <DependentUpon>F_shop.cs</DependentUpon>

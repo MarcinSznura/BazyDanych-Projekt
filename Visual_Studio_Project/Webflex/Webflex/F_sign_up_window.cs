@@ -95,9 +95,6 @@ namespace Webflex
 
                 SqlCommand cmd;
                 SqlDataAdapter adapter = new SqlDataAdapter();
-                //string newMovie = "";
-                // newMovie = Console.ReadLine();
-                //newMovie = textBox1.Text;
                 int new_id = 0;
                 new_id = NextId();
                 Connect();
