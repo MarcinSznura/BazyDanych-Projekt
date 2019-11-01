@@ -14,8 +14,9 @@ namespace Webflex
 {
     public partial class F_shop : Form
     {
-        string connetionString;
-        SqlConnection conn;
+        static string connectionString = "Server=.\\SQLEXPRESS;Database=Webflex;Integrated Security=True;";
+        static SqlConnection conn = new SqlConnection(connectionString);
+
         string title = "";
         int id, price = 0;
         BindingSource bindingSource1 = new BindingSource();
@@ -75,7 +76,7 @@ namespace Webflex
 
         private void MoviesData()
         {
-            Connect();
+            conn.Open();
             SqlCommand cmd = new SqlCommand("SELECT [id],[title],[price] FROM [Webflex].[dbo].[Movies]", conn);
             SqlDataReader reader = cmd.ExecuteReader();
             if (reader.HasRows)
@@ -89,35 +90,9 @@ namespace Webflex
             }
             reader.Close();
             cmd.Dispose();
-            Disconnect();
+            conn.Close();
         }
 
-        private void Connect()
-        {
-            connetionString = "Server=.\\SQLEXPRESS;Database=Webflex;Integrated Security=True;";
-            conn = new SqlConnection(connetionString);
-            try
-            {
-                conn.Open();
-                //MessageBox.Show("Connection Open  !");
-            }
-            catch
-            {
-                MessageBox.Show("Failed to connect!");
-            }
-        }
-
-        private void Disconnect()
-        {
-            try
-            {
-                conn.Close();
-                //MessageBox.Show("Connection Closed  !");
-            }
-            catch
-            {
-                MessageBox.Show("Failed to disconnect!");
-            }
-        }
+        
     }
 }

@@ -14,8 +14,8 @@ namespace Webflex
     public partial class F_sign_up_window : Form
     {
 
-        string connetionString;
-        SqlConnection conn;
+        static string connectionString = "Server=.\\SQLEXPRESS;Database=Webflex;Integrated Security=True;";
+        static SqlConnection conn = new SqlConnection(connectionString);
 
         public F_sign_up_window()
         {
@@ -27,38 +27,12 @@ namespace Webflex
 
         }
 
-        private void Connect()
-        {
-            connetionString = "Server=.\\SQLEXPRESS;Database=Webflex;Integrated Security=True;";
-            conn = new SqlConnection(connetionString);
-            try
-            {
-                conn.Open();
-                //MessageBox.Show("Connection Open  !");
-            }
-            catch
-            {
-                MessageBox.Show("Failed to connect!");
-            }
-        }
-
-        private void Disconnect()
-        {
-            try
-            {
-                conn.Close();
-                //MessageBox.Show("Connection Closed  !");
-            }
-            catch
-            {
-                MessageBox.Show("Failed to disconnect!");
-            }
-        }
+      
 
         private int NextId()
         {
             int id=0;
-            Connect();
+            conn.Open();
             try
             {
                 SqlCommand cmd = new SqlCommand("SELECT [id] FROM [Webflex].[dbo].[Users]", conn);
@@ -78,7 +52,7 @@ namespace Webflex
             {
                 MessageBox.Show("Error");
             }
-            Disconnect();
+            conn.Close();
             return id+1;
         }
 
@@ -97,7 +71,7 @@ namespace Webflex
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 int new_id = 0;
                 new_id = NextId();
-                Connect();
+                conn.Open();
                 try
                 {
                     string sql = "INSERT INTO Users (ID, login,password,name,surname,[e-mail],balance) VALUES('"+new_id+"', '"+login+"', '"+password+"', '"+name+"', '"+surname+"', '"+email+"', '0');";
@@ -116,7 +90,7 @@ namespace Webflex
             {
                 MessageBox.Show("Fill empty fields");
             }
-            Disconnect();
+            conn.Close();
         }
 
         private void Button2_Click(object sender, EventArgs e)

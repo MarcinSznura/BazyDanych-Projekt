@@ -13,10 +13,8 @@ namespace Webflex
 {
     public partial class F_payment_window : Form
     {
-
-        string connetionString;
-        SqlConnection conn;
-        string code = "1234";
+        static string connectionString = "Server=.\\SQLEXPRESS;Database=Webflex;Integrated Security=True;";
+        static SqlConnection conn = new SqlConnection(connectionString);
 
         public F_payment_window()
         {
@@ -87,44 +85,17 @@ namespace Webflex
         private decimal AddFundsToBalance(decimal howMuch)
         {
             decimal balance = 0;
-            Connect();
+            conn.Open();
             SqlCommand cmd = new SqlCommand("UPDATE [Webflex].[dbo].[Users] SET balance = balance + 10 WHERE id = "+Program.activeUserId+"; ", conn);
             SqlDataAdapter adapter = new SqlDataAdapter();
             adapter.UpdateCommand = new SqlCommand("UPDATE [Webflex].[dbo].[Users] SET balance = balance + "+howMuch+" WHERE id = " + Program.activeUserId + "; ", conn);
             adapter.UpdateCommand.ExecuteNonQuery();
-           
+            conn.Close();
             cmd.Dispose();
-            Disconnect();
             return balance;
         }
 
 
-        private void Connect()
-        {
-            connetionString = "Server=.\\SQLEXPRESS;Database=Webflex;Integrated Security=True;";
-            conn = new SqlConnection(connetionString);
-            try
-            {
-                conn.Open();
-                //MessageBox.Show("Connection Open  !");
-            }
-            catch
-            {
-                MessageBox.Show("Failed to connect!");
-            }
-        }
-
-        private void Disconnect()
-        {
-            try
-            {
-                conn.Close();
-                //MessageBox.Show("Connection Closed  !");
-            }
-            catch
-            {
-                MessageBox.Show("Failed to disconnect!");
-            }
-        }
+        
     }
 }

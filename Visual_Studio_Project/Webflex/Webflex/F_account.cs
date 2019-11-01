@@ -13,8 +13,10 @@ namespace Webflex
 {
     public partial class F_account : Form
     {
+        static string connectionString = "Server=.\\SQLEXPRESS;Database=Webflex;Integrated Security=True;";
+        static SqlConnection conn = new SqlConnection(connectionString);
+
         string connetionString;
-        SqlConnection conn;
         string login, password, name, surname, email = "";
         string oldpass, newpass1, newpass2 = "";
         string password_chcek, newmail1, newmail2 = "";
@@ -90,26 +92,26 @@ namespace Webflex
 
         private void ChangeEmail(string email)
         {
-            Connect();
+            conn.Open();
             SqlDataAdapter adapter = new SqlDataAdapter();
             adapter.UpdateCommand = new SqlCommand("UPDATE[Webflex].[dbo].[Users] SET [e-mail] = '"+email+"' WHERE id = "+Program.activeUserId, conn);
             adapter.UpdateCommand.ExecuteNonQuery();
-            Disconnect();
+            conn.Close();
         }
 
         private void ChangePassword(string newPassword)
         {
-            Connect();
+            conn.Open();
             SqlDataAdapter adapter = new SqlDataAdapter();
             adapter.UpdateCommand = new SqlCommand("UPDATE [Webflex].[dbo].[Users] SET [password] = '" + newPassword + "' WHERE id = " + Program.activeUserId, conn);
             adapter.UpdateCommand.ExecuteNonQuery();
-            Disconnect();
+            conn.Close();
         }
 
 
         private void UserData()
         {
-            Connect();
+            conn.Open();
             SqlCommand cmd = new SqlCommand("SELECT * FROM [Webflex].[dbo].[Users] WHERE id = '" + Program.activeUserId + "'", conn);
             SqlDataReader reader = cmd.ExecuteReader();
             if (reader.HasRows)
@@ -125,36 +127,10 @@ namespace Webflex
             }
             reader.Close();
             cmd.Dispose();
-            Disconnect();
+            conn.Close();
         }
 
-        private void Connect()
-        {
-            connetionString = "Server=.\\SQLEXPRESS;Database=Webflex;Integrated Security=True;";
-            conn = new SqlConnection(connetionString);
-            try
-            {
-                conn.Open();
-                //MessageBox.Show("Connection Open  !");
-            }
-            catch
-            {
-                MessageBox.Show("Failed to connect!");
-            }
-        }
-
-        private void Disconnect()
-        {
-            try
-            {
-                conn.Close();
-                //MessageBox.Show("Connection Closed  !");
-            }
-            catch
-            {
-                MessageBox.Show("Failed to disconnect!");
-            }
-        }
+       
 
     }
 }
