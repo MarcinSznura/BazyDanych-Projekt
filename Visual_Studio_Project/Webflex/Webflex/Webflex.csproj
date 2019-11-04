@@ -102,6 +102,12 @@
     <Compile Include="F_sign_up_window.Designer.cs">
       <DependentUpon>F_sign_up_window.cs</DependentUpon>
     </Compile>
+    <Compile Include="ShopListing.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ShopListing.Designer.cs">
+      <DependentUpon>ShopListing.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="F_account.resx">
       <DependentUpon>F_account.cs</DependentUpon>
     </EmbeddedResource>
@@ -137,6 +143,9 @@
     </Compile>
     <EmbeddedResource Include="F_sign_up_window.resx">
       <DependentUpon>F_sign_up_window.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShopListing.resx">
+      <DependentUpon>ShopListing.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
