@@ -15,7 +15,6 @@ namespace Webflex
     {
         public static int activeUserId=0;
         public static string activeUserName = "";
-        public static string activeUserLogin = "";
         public static List<int> activeUserLibrary = new List<int>();
 
         /// <summary>

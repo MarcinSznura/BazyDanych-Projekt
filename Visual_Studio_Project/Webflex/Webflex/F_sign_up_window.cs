@@ -54,6 +54,40 @@ namespace Webflex
             return id+1;
         }
 
+
+        private bool LoginTaken(string newLogin)
+        {
+            bool taken = false;
+            string name = "";
+            conn.Open();
+            try
+            {
+                SqlCommand cmd = new SqlCommand("SELECT [login] FROM [Webflex].[dbo].[Users]", conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    name = reader.GetString(0);
+                    if (name == newLogin)
+                    {
+                        reader.Close();
+                        cmd.Dispose();
+                        conn.Close();
+                        return true;
+                    }
+
+                }
+                reader.Close();
+                cmd.Dispose();
+            }
+            catch
+            {
+                MessageBox.Show("Error");
+            }
+            conn.Close();
+            return false;
+        }
+
         private void Button1_Click(object sender, EventArgs e)
         {
             string login = textBox1.Text;
@@ -69,28 +103,29 @@ namespace Webflex
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 int new_id = 0;
                 new_id = NextId();
-                conn.Open();
-                try
-                {
-                    string sql = "INSERT INTO Users (ID, login,password,name,surname,[e-mail],balance) VALUES('"+new_id+"', '"+login+"', '"+password+"', '"+name+"', '"+surname+"', '"+email+"', '0');";
-                    cmd = new SqlCommand(sql, conn);
+                
+                
+                    if (!LoginTaken(login))
+                    {
+                        string sql = "INSERT INTO Users (ID, login,password,name,surname,[e-mail],balance) VALUES('" + new_id + "', '" + login + "', '" + password + "', '" + name + "', '" + surname + "', '" + email + "', '0');";
+                        cmd = new SqlCommand(sql, conn);
+                    conn.Open();
                     adapter.InsertCommand = new SqlCommand(sql, conn);
-                    adapter.InsertCommand.ExecuteNonQuery();
+                        adapter.InsertCommand.ExecuteNonQuery();
+
+                    conn.Close();
                     cmd.Dispose();
-                    adapter.Dispose();
-                    MessageBox.Show("Signing up successful. You can go back to main page and sign in!");
-                    CreateUserLibrary(login);
-                }
-                catch
-                {
-                    MessageBox.Show("Adding failed");
-               }
+                        adapter.Dispose();
+                        MessageBox.Show("Signing up successful. You can go back to main page and sign in!");
+                        CreateUserLibrary(login);
+                    }
+                    else MessageBox.Show("Login taken");
+               
             }
             else
             {
                 MessageBox.Show("Fill empty fields");
             }
-           conn.Close();
         }
 
 
@@ -98,6 +133,7 @@ namespace Webflex
         {
             string createUserTable = "CREATE TABLE " + login + "_Library (id int NOT NULL,title varchar(255) NOT NULL,bought bit NOT NULL CONSTRAINT "+login+"_pk PRIMARY KEY(id));";
             string populateUserTable = "INSERT INTO [" + login + "_Library] VALUES ";
+            conn.Open();
             for (int i = 1; i <= AllMoviesNumber(); i++)
             {
                 populateUserTable = populateUserTable + "(" + i + ", 'a', 0)";
@@ -109,6 +145,7 @@ namespace Webflex
             SqlCommand command = new SqlCommand(createUserTable, conn);
             command.ExecuteNonQuery();
             command.Dispose();
+
 
             SqlCommand cmd2;
             SqlDataAdapter adapter2 = new SqlDataAdapter();
@@ -123,6 +160,7 @@ namespace Webflex
             adapter3.UpdateCommand = new SqlCommand(updateUserTable, conn);
             adapter3.UpdateCommand.ExecuteNonQuery();
             adapter3.Dispose();
+            conn.Close();
         }
 
         private int AllMoviesNumber()

@@ -42,6 +42,41 @@ namespace Webflex
             CenterToParent();
         }
 
+        private void Button4_Click(object sender, EventArgs e)
+        {
+            var confirmResult = MessageBox.Show("Are you sure to delete you account ??",
+                                     "Confirm Delete!!",
+                                     MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                var confirmResult2 = MessageBox.Show("This you will loose all movies you bought!!!",
+                                     "Are you sure??",
+                                     MessageBoxButtons.YesNo);
+                if (confirmResult2 == DialogResult.Yes)
+                {
+                    SqlCommand command = new SqlCommand("DROP TABLE "+Program.activeUserName+"_Library", conn);
+                    conn.Open();
+                    command.ExecuteNonQuery();
+                    command.Dispose();
+                    
+                    SqlDataAdapter adapter = new SqlDataAdapter();
+                    adapter.DeleteCommand = new SqlCommand("DELETE FROM Users WHERE id ="+Program.activeUserId, conn);
+                    adapter.DeleteCommand.ExecuteNonQuery();
+                    conn.Close();
+                    adapter.Dispose();
+
+                    MessageBox.Show("Farwell " + Program.activeUserName);
+
+                    Program.activeUserId = 0;
+                    Program.activeUserName = "";
+                    this.Hide();
+                    F_first_window ss = new F_first_window();
+                    ss.Show();
+                }
+            }
+           
+        }
+
         private void Button2_Click(object sender, EventArgs e)
         {
             password_chcek = textBox4.Text;

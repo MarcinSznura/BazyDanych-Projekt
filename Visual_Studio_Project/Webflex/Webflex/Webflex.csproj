@@ -108,6 +108,12 @@
     <Compile Include="ShopListing.Designer.cs">
       <DependentUpon>ShopListing.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserLibraryList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserLibraryList.Designer.cs">
+      <DependentUpon>UserLibraryList.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="F_account.resx">
       <DependentUpon>F_account.cs</DependentUpon>
     </EmbeddedResource>
@@ -146,6 +152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ShopListing.resx">
       <DependentUpon>ShopListing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserLibraryList.resx">
+      <DependentUpon>UserLibraryList.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

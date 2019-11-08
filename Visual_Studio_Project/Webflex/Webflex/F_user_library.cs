@@ -17,8 +17,6 @@ namespace Webflex
         static string connectionString = "Server=.\\SQLEXPRESS;Database=Webflex;Integrated Security=True;";
         static SqlConnection conn = new SqlConnection(connectionString);
 
-        string title = "";
-        int id, price = 0;
         public F_user_library()
         {
             InitializeComponent();
@@ -73,17 +71,15 @@ namespace Webflex
             List<int> UserMovies = GetUserMovies();
 
 
-            ShopListing[] shopListing = new ShopListing[20];
+            UserLibraryList[] userLibraryList = new UserLibraryList[20];
             for (int i = 0; i < TitleArray.Count; i++)
             {
                 string Title = TitleArray[i];
                 string Genre = GenreArray[i];
-                int Price = PriceArray[i];
                 int Id = IDArray[i];
-                shopListing[i] = new ShopListing();
-                shopListing[i].Title = Title;
-                shopListing[i].Genre = Genre;
-                shopListing[i].Price = Price;
+                userLibraryList[i] = new UserLibraryList();
+                userLibraryList[i].Title = Title;
+                userLibraryList[i].Genre = Genre;
 
                 if (flowLayoutPanel1.Controls.Count < 0)
                 {
@@ -92,7 +88,7 @@ namespace Webflex
 
                 if (IsInLibrary(Id,UserMovies))
                 {
-                    flowLayoutPanel1.Controls.Add(shopListing[i]);
+                    flowLayoutPanel1.Controls.Add(userLibraryList[i]);
                 }
                
             }
@@ -115,6 +111,11 @@ namespace Webflex
         }
 
         private void ShopListing1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UserLibraryList1_Load(object sender, EventArgs e)
         {
 
         }

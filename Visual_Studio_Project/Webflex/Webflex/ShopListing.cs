@@ -78,25 +78,45 @@ namespace Webflex
 
         private void Button_Click(object sender, EventArgs e)
         {
-            BuyAMovie(_id,_price);
-            MessageBox.Show("kupiles film bro");
-            this.Visible = false;
+            if (UserBalance() >= _price)
+            {
+                BuyAMovie(_id, _price);
+                MessageBox.Show("Movie added to your library");
+
+                this.Visible = false;
+            }
+            else MessageBox.Show("Not sufficient funds");
         }
 
-        private decimal BuyAMovie(int id,decimal howMuch)
+        private void BuyAMovie(int id,decimal howMuch)
         {
-            decimal balance = 0;
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("UPDATE Users SET balance = balance - " + howMuch + " WHERE id = " + Program.activeUserId + "; UPDATE " + Program.activeUserName + "_Library set bought = 1 WHERE id =" + id);
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.UpdateCommand = new SqlCommand("UPDATE Users SET balance = balance - " + howMuch + " WHERE id = " + Program.activeUserId + "; UPDATE " + Program.activeUserName + "_Library set bought = 1 WHERE id =" + id, conn);
+                adapter.UpdateCommand.ExecuteNonQuery();
+                conn.Close();
+                cmd.Dispose();
+                adapter.Dispose();
+        }
+
+        private decimal UserBalance()
+        {
+            decimal balance=0;
             conn.Open();
-            SqlCommand cmd = new SqlCommand("UPDATE Users SET balance = balance - " + howMuch + " WHERE id = "+Program.activeUserId+"; UPDATE "+Program.activeUserName+ "_Library set bought = 1 WHERE id ="+id);
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            adapter.UpdateCommand = new SqlCommand("UPDATE Users SET balance = balance - " + howMuch + " WHERE id = "+Program.activeUserId+"; UPDATE " + Program.activeUserName + "_Library set bought = 1 WHERE id =" + id, conn);
-            adapter.UpdateCommand.ExecuteNonQuery();
+            SqlCommand cmd = new SqlCommand("select balance from Users where id=" + Program.activeUserId,conn);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                balance = reader.GetDecimal(0);
+            }
             conn.Close();
+            reader.Close();
             cmd.Dispose();
-            adapter.Dispose();
+
             return balance;
         }
-
 
     }
 }

@@ -30,7 +30,7 @@
         {
             this.button3 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.shopListing1 = new Webflex.ShopListing();
+            this.userLibraryList1 = new Webflex.UserLibraryList();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,26 +49,24 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Controls.Add(this.shopListing1);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 26);
+            this.flowLayoutPanel1.Controls.Add(this.userLibraryList1);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 21);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(600, 319);
             this.flowLayoutPanel1.TabIndex = 7;
             this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.FlowLayoutPanel1_Paint);
             // 
-            // shopListing1
+            // userLibraryList1
             // 
-            this.shopListing1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.shopListing1.Genre = null;
-            this.shopListing1.Id = 0;
-            this.shopListing1.Location = new System.Drawing.Point(2, 2);
-            this.shopListing1.Margin = new System.Windows.Forms.Padding(2);
-            this.shopListing1.Name = "shopListing1";
-            this.shopListing1.Price = 0;
-            this.shopListing1.Size = new System.Drawing.Size(275, 82);
-            this.shopListing1.TabIndex = 1;
-            this.shopListing1.Title = null;
-            this.shopListing1.Load += new System.EventHandler(this.ShopListing1_Load);
+            this.userLibraryList1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.userLibraryList1.Genre = null;
+            this.userLibraryList1.Id = 0;
+            this.userLibraryList1.Location = new System.Drawing.Point(3, 3);
+            this.userLibraryList1.Name = "userLibraryList1";
+            this.userLibraryList1.Size = new System.Drawing.Size(272, 83);
+            this.userLibraryList1.TabIndex = 2;
+            this.userLibraryList1.Title = null;
+            this.userLibraryList1.Load += new System.EventHandler(this.UserLibraryList1_Load);
             // 
             // F_user_library
             // 
@@ -89,6 +87,6 @@
 
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private ShopListing shopListing1;
+        private UserLibraryList userLibraryList1;
     }
 }
