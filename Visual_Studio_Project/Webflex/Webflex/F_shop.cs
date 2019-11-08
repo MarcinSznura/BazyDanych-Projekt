@@ -17,13 +17,9 @@ namespace Webflex
         static string connectionString = "Server=.\\SQLEXPRESS;Database=Webflex;Integrated Security=True;";
         static SqlConnection conn = new SqlConnection(connectionString);
 
-        string title = "";
-        int id, price = 0;
-
         public F_shop()
         {
             InitializeComponent();
-           // MoviesData();
         }
 
         private void Button3_Click(object sender, EventArgs e)
@@ -42,25 +38,6 @@ namespace Webflex
         private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             
-        }
-
-        private void MoviesData()
-        {
-            conn.Open();
-            SqlCommand cmd = new SqlCommand("SELECT [id],[title],[price] FROM [Webflex].[dbo].[Movies]", conn);
-            SqlDataReader reader = cmd.ExecuteReader();
-            if (reader.HasRows)
-            {
-                while (reader.Read())
-                {
-                    id = reader.GetInt32(0);
-                    title = reader.GetString(1);
-                    price = reader.GetInt32(2);
-                }
-            }
-            reader.Close();
-            cmd.Dispose();
-            conn.Close();
         }
 
         private void shopListing1_Load(object sender, EventArgs e)
@@ -106,27 +83,58 @@ namespace Webflex
 
             Console.Write(TitleArray);
 
+            List<int> UserMovies = GetUserMovies();
             ShopListing[] shopListing = new ShopListing[20];
             for(int i = 0; i < TitleArray.Count; i++)
             {
                 string Title = TitleArray[i];
                 string Genre = GenreArray[i];
                 int Price = PriceArray[i];
+                int Id = IDArray[i];
                 shopListing[i] = new ShopListing();
                 shopListing[i].Title = Title;
                 shopListing[i].Genre = Genre;
                 shopListing[i].Price = Price;
+                shopListing[i].Id = Id;
 
                 if (flowLayoutPanel1.Controls.Count < 0)
                 {
                     flowLayoutPanel1.Controls.Clear();
                 }
 
+
+                
+                if (!IsInLibrary(Id,UserMovies))
                 flowLayoutPanel1.Controls.Add(shopListing[i]);
 
             }
         }
-        
+
+        private List<int> GetUserMovies()
+        {
+            List<int> UserMovies = new List<int>();
+            SqlCommand cmd2 = new SqlCommand("select [id] from " + Program.activeUserName + "_Library where bought = 1;", conn);
+            conn.Open();
+            SqlDataReader reader2 = cmd2.ExecuteReader();
+            while (reader2.Read())
+            {
+                UserMovies.Add(reader2.GetInt32(0));
+            }
+            conn.Close();
+            reader2.Close();
+            cmd2.Dispose();
+            return UserMovies;
+        }
+
+        private bool IsInLibrary(int id, List<int> UserMovies)
+        {
+            for (int i = 0; i < UserMovies.Count(); i++)
+            {
+                if (id == UserMovies[i]) return true;
+            }
+            return false;
+        }
+
 
 
     }
