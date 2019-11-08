@@ -31,7 +31,6 @@ namespace Webflex
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            string activeUser="";
             conn.Open();
             try
             {
@@ -42,58 +41,67 @@ namespace Webflex
                 MessageBox.Show("Error");
             }
             Program.activeUserId = SetActiveUser(Program.activeUserName);
+            conn.Close();
 
-            if (Program.activeUserId != "")
+
+            if (Program.activeUserId != 0)
             {
+
                 this.Hide();
                 F_user_account_window ss = new F_user_account_window();
                 ss.Show();
             }
 
-            conn.Close();
+          
         }
-
 
         private string SignIn()
         {
             string activeUser="";
             SqlCommand cmd = new SqlCommand("SELECT [login],[password] FROM [Webflex].[dbo].[Users]", conn);
-            SqlDataReader reader = cmd.ExecuteReader();
-
-
-            string user_login = textBox1.Text;
-            string password = textBox2.Text;
-
-            bool wrong_password = true;
-            while (reader.Read())
+            using(
+            SqlDataReader reader = cmd.ExecuteReader()
+            )
             {
-                if (user_login == reader.GetString(0) && password == reader.GetString(1))
+                string user_login = textBox1.Text;
+                string password = textBox2.Text;
+
+                bool wrong_password = true;
+                while (reader.Read())
                 {
-                    wrong_password = false;
-                    activeUser = reader.GetString(0);
-                    break;
+                    if (user_login == reader.GetString(0) && password == reader.GetString(1))
+                    {
+                        wrong_password = false;
+                        activeUser = reader.GetString(0);
+                        break;
+                    }
                 }
+                if (wrong_password) MessageBox.Show("Wrong user name or password!");
+                reader.Close();
+                cmd.Dispose();
             }
-            if (wrong_password) MessageBox.Show("Wrong user name or password!");
-            reader.Close();
-            cmd.Dispose();
+            
             return activeUser;
         }
 
-        private string SetActiveUser(string user)
+        private int SetActiveUser(string user)
         {
-            string activeUser="";
+            int activeUser=0;
             SqlCommand cmd2 = new SqlCommand("SELECT [id] FROM [Webflex].[dbo].[Users] WHERE login = '" + user + "'", conn);
-            SqlDataReader reader2 = cmd2.ExecuteReader();
-            if (reader2.HasRows)
+            using (
+            SqlDataReader reader2 = cmd2.ExecuteReader()
+            )
             {
-                while (reader2.Read())
+                if (reader2.HasRows)
                 {
-                    activeUser = reader2.GetString(0);
+                    while (reader2.Read())
+                    {
+                        activeUser = reader2.GetInt32(0);
+                    }
                 }
+                reader2.Close();
+                cmd2.Dispose();
             }
-            reader2.Close();
-            cmd2.Dispose();
             return activeUser;
         }
 

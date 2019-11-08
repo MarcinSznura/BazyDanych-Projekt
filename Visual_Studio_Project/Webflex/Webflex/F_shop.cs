@@ -19,13 +19,11 @@ namespace Webflex
 
         string title = "";
         int id, price = 0;
-        BindingSource bindingSource1 = new BindingSource();
-        SqlDataAdapter dataAdapter = new SqlDataAdapter();
 
         public F_shop()
         {
             InitializeComponent();
-            MoviesData();
+           // MoviesData();
         }
 
         private void Button3_Click(object sender, EventArgs e)
@@ -38,8 +36,6 @@ namespace Webflex
         private void F_shop_Load(object sender, EventArgs e)
         {
             CenterToParent();
-            /*dataGridView1.DataSource = bindingSource1;
-            GetData("SELECT [id],[title],[price] FROM [Webflex].[dbo].[Movies]");*/
             PopulateItems();
         }
 
@@ -47,33 +43,6 @@ namespace Webflex
         {
             
         }
-
-
-        /*void GetData(string cmd)
-        {
-            // Create a new data adapter based on the specified query.
-            dataAdapter = new SqlDataAdapter(cmd, conn);
-
-            // Create a command builder to generate SQL update, insert, and
-            // delete commands based on selectCommand. 
-            SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
-
-            // Populate a new data table and bind it to the BindingSource.
-            DataTable table = new DataTable
-            {
-                Locale = CultureInfo.InvariantCulture
-            };
-            dataAdapter.Fill(table);
-            bindingSource1.DataSource = table;
-
-            // Resize the DataGridView columns to fit the newly loaded content.
-            dataGridView1.AutoResizeColumns(
-                DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
-
-            dataAdapter.Dispose();
-
-
-        }*/
 
         private void MoviesData()
         {
@@ -99,13 +68,23 @@ namespace Webflex
 
         }
 
+        private void FlowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void ShopListing1_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
         private void PopulateItems()
         {
             flowLayoutPanel1.Controls.Clear();
 
             List<int> IDArray = new List<int>();
-            List<String> TitleArray = new List<String>();
-            List<String> GenreArray = new List<String>();
+            List<string> TitleArray = new List<string>();
+            List<string> GenreArray = new List<string>();
             List<int> PriceArray = new List<int>();
 
                         conn.Open();
@@ -130,8 +109,8 @@ namespace Webflex
             ShopListing[] shopListing = new ShopListing[20];
             for(int i = 0; i < TitleArray.Count; i++)
             {
-                String Title = TitleArray[i];
-                String Genre = GenreArray[i];
+                string Title = TitleArray[i];
+                string Genre = GenreArray[i];
                 int Price = PriceArray[i];
                 shopListing[i] = new ShopListing();
                 shopListing[i].Title = Title;
@@ -148,5 +127,7 @@ namespace Webflex
             }
         }
         
+
+
     }
 }

@@ -14,8 +14,9 @@ namespace Webflex
     static class Program
     {
 
-        public static string activeUserId="";
+        public static int activeUserId=0;
         public static string activeUserName = "";
+        public static List<int> activeUserLibrary = new List<int>();
 
         /// <summary>
         /// The main entry point for the application.

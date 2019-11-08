@@ -58,7 +58,7 @@
             this.LPrice.AutoSize = true;
             this.LPrice.Location = new System.Drawing.Point(219, 11);
             this.LPrice.Name = "LPrice";
-            this.LPrice.Size = new System.Drawing.Size(46, 17);
+            this.LPrice.Size = new System.Drawing.Size(35, 13);
             this.LPrice.TabIndex = 4;
             this.LPrice.Text = "label2";
             // 
@@ -70,6 +70,7 @@
             this.Button.TabIndex = 5;
             this.Button.Text = "BUY";
             this.Button.UseVisualStyleBackColor = true;
+            this.Button.Click += new System.EventHandler(this.Button_Click);
             // 
             // ShopListing
             // 
@@ -88,9 +89,9 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox ListingPicture;
-        private System.Windows.Forms.Label ListingTitle;
-        private System.Windows.Forms.Label ListingYear;
+        //private System.Windows.Forms.PictureBox ListingPicture;
+        //private System.Windows.Forms.Label ListingTitle;
+        //private System.Windows.Forms.Label ListingYear;
         private System.Windows.Forms.Label LTitle;
         private System.Windows.Forms.Label LGenre;
         private System.Windows.Forms.Label LPrice;

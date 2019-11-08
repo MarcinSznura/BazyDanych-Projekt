@@ -16,7 +16,6 @@ namespace Webflex
         static string connectionString = "Server=.\\SQLEXPRESS;Database=Webflex;Integrated Security=True;";
         static SqlConnection conn = new SqlConnection(connectionString);
 
-        string connetionString;
         string login, password, name, surname, email = "";
         string oldpass, newpass1, newpass2 = "";
         string password_chcek, newmail1, newmail2 = "";
