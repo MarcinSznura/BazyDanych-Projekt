@@ -31,6 +31,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.userLibraryList1 = new Webflex.UserLibraryList();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,11 +69,30 @@
             this.userLibraryList1.Title = null;
             this.userLibraryList1.Load += new System.EventHandler(this.UserLibraryList1_Load);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "all",
+            "Actions",
+            "Comedy",
+            "Crime",
+            "Documentary",
+            "Drama",
+            "Horror",
+            "Science Fiction"});
+            this.comboBox1.Location = new System.Drawing.Point(15, 369);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 8;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
+            // 
             // F_user_library
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 441);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.button3);
             this.Name = "F_user_library";
@@ -88,5 +108,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private UserLibraryList userLibraryList1;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

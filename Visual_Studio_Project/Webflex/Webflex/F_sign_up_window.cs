@@ -118,7 +118,9 @@ namespace Webflex
                         adapter.Dispose();
                         MessageBox.Show("Signing up successful. You can go back to main page and sign in!");
                         CreateUserLibrary(login);
-                    }
+                    CreateUserProcedureShopFilter(login);
+                    CreateUserProcedureLibraryFilter(login);
+                }
                     else MessageBox.Show("Login taken");
                
             }
@@ -128,6 +130,51 @@ namespace Webflex
             }
         }
 
+        private void CreateUserProcedureLibraryFilter(string name)
+        {
+            string createUserProcedure = @"
+                CREATE PROCEDURE[dbo].[FilterLibraryOfUser" + name + @"]
+@genres varchar(20)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+           SELECT dbo.Movies.id, dbo.Movies.title, dbo.Movies.genres, dbo.Movies.[maturity ratings], dbo.Movies.country, dbo.Movies.[release date], dbo.Movies.poster, dbo.Movies.price, dbo." + name + @"_Library.id AS Expr1,
+                                dbo."+name+@"_Library.bought
+       FROM            dbo.Movies INNER JOIN
+       
+                                dbo." + name + "_Library ON dbo.Movies.id = dbo." + name + @"_Library.id
+       WHERE(dbo.Movies.genres = @genres) AND(dbo." + name + "_Library.bought = 1) END";
+            conn.Open();
+
+            SqlCommand command = new SqlCommand(createUserProcedure, conn);
+            command.ExecuteNonQuery();
+            command.Dispose();
+            conn.Close();
+        }
+
+        private void CreateUserProcedureShopFilter(string name)
+        {
+            string createUserProcedure = @"
+                CREATE PROCEDURE[dbo].[FilterShopOfUser" + name + @"]
+@genres varchar(20)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+           SELECT dbo.Movies.id, dbo.Movies.title, dbo.Movies.genres, dbo.Movies.[maturity ratings], dbo.Movies.country, dbo.Movies.[release date], dbo.Movies.poster, dbo.Movies.price, dbo." + name + @"_Library.id AS Expr1,
+                                dbo." + name + @"_Library.bought
+       FROM            dbo.Movies INNER JOIN
+       
+                                dbo." + name + "_Library ON dbo.Movies.id = dbo." + name + @"_Library.id
+       WHERE(dbo.Movies.genres = @genres) AND(dbo." + name + "_Library.bought = 0) END";
+            conn.Open();
+
+            SqlCommand command = new SqlCommand(createUserProcedure, conn);
+            command.ExecuteNonQuery();
+            command.Dispose();
+            conn.Close();
+        }
 
         private void CreateUserLibrary(string login)
         {

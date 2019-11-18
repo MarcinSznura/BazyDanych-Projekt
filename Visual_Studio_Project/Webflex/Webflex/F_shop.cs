@@ -17,6 +17,8 @@ namespace Webflex
         static string connectionString = "Server=.\\SQLEXPRESS;Database=Webflex;Integrated Security=True;";
         static SqlConnection conn = new SqlConnection(connectionString);
 
+        string genre = "all";
+
         public F_shop()
         {
             InitializeComponent();
@@ -32,7 +34,7 @@ namespace Webflex
         private void F_shop_Load(object sender, EventArgs e)
         {
             CenterToParent();
-            PopulateItems();
+            PopulateItems(genre);
         }
 
         private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -55,7 +57,7 @@ namespace Webflex
 
         }
 
-        private void PopulateItems()
+        private void PopulateItems(string genre)
         {
             flowLayoutPanel1.Controls.Clear();
 
@@ -83,7 +85,7 @@ namespace Webflex
 
             Console.Write(TitleArray);
 
-            List<int> UserMovies = GetUserMovies();
+            List<int> UserMovies = GetUserMovies(genre);
             ShopListing[] shopListing = new ShopListing[20];
             for(int i = 0; i < TitleArray.Count; i++)
             {
@@ -104,16 +106,22 @@ namespace Webflex
 
 
                 
-                if (!IsInLibrary(Id,UserMovies))
+                if (IsInLibrary(Id,UserMovies))
                 flowLayoutPanel1.Controls.Add(shopListing[i]);
 
             }
         }
 
-        private List<int> GetUserMovies()
+        private List<int> GetUserMovies(string genre)
         {
             List<int> UserMovies = new List<int>();
-            SqlCommand cmd2 = new SqlCommand("select [id] from " + Program.activeUserName + "_Library where bought = 1;", conn);
+            string cmdd = "all";
+            if (genre != "all")
+                cmdd = " DECLARE	@return_value int EXEC @return_value = [dbo].[FilterShopOfUser" + Program.activeUserName + "]  @genres = N'" + genre + "'";
+            else
+                cmdd = "select [id] from " + Program.activeUserName + "_Library where bought = 0;";
+
+            SqlCommand cmd2 = new SqlCommand(cmdd, conn);
             conn.Open();
             SqlDataReader reader2 = cmd2.ExecuteReader();
             while (reader2.Read())
@@ -135,7 +143,10 @@ namespace Webflex
             return false;
         }
 
-
-
+        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            genre = comboBox1.Text;
+            PopulateItems(genre);
+        }
     }
 }

@@ -30,6 +30,7 @@
         {
             this.button3 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.shopListing1 = new Webflex.ShopListing();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -57,10 +58,29 @@
             this.flowLayoutPanel1.TabIndex = 9;
             this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.FlowLayoutPanel1_Paint);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "all",
+            "Actions",
+            "Comedy",
+            "Crime",
+            "Documentary",
+            "Drama",
+            "Horror",
+            "Science Fiction"});
+            this.comboBox1.Location = new System.Drawing.Point(10, 357);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 10;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
+            // 
             // shopListing1
             // 
             this.shopListing1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.shopListing1.Genre = null;
+            this.shopListing1.Id = 0;
             this.shopListing1.Location = new System.Drawing.Point(2, 2);
             this.shopListing1.Margin = new System.Windows.Forms.Padding(2);
             this.shopListing1.Name = "shopListing1";
@@ -75,6 +95,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 441);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.button3);
             this.Name = "F_shop";
@@ -90,5 +111,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private ShopListing shopListing1;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

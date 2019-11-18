@@ -17,6 +17,8 @@ namespace Webflex
         static string connectionString = "Server=.\\SQLEXPRESS;Database=Webflex;Integrated Security=True;";
         static SqlConnection conn = new SqlConnection(connectionString);
 
+        string genre = "all";
+
         public F_user_library()
         {
             InitializeComponent();
@@ -97,7 +99,12 @@ namespace Webflex
         private List<int> GetUserMovies()
         {
             List<int> UserMovies = new List<int>();
-            SqlCommand cmd2 = new SqlCommand("select [id] from " + Program.activeUserName + "_Library where bought = 1;", conn);
+            string cmdd = "all";
+            if (genre != "all")
+                cmdd = " DECLARE	@return_value int EXEC @return_value = [dbo].[FilterLibraryOfUser" + Program.activeUserName + "]  @genres = N'" + genre + "'";
+            else
+                cmdd = "select [id] from " + Program.activeUserName + "_Library where bought = 1;";
+            SqlCommand cmd2 = new SqlCommand(cmdd, conn);
             conn.Open();
             SqlDataReader reader2 = cmd2.ExecuteReader();
             while (reader2.Read())
@@ -129,7 +136,11 @@ namespace Webflex
             return false;
         }
 
-
+        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            genre = comboBox1.Text;
+            PopulateItems();
+        }
     }
 
 }
