@@ -62,8 +62,17 @@ namespace Webflex
                     SqlDataAdapter adapter = new SqlDataAdapter();
                     adapter.DeleteCommand = new SqlCommand("DELETE FROM Users WHERE id ="+Program.activeUserId, conn);
                     adapter.DeleteCommand.ExecuteNonQuery();
-                    conn.Close();
                     adapter.Dispose();
+
+                    SqlCommand command2 = new SqlCommand("DROP PROCEDURE FilterShopOfUser" + Program.activeUserName, conn);
+                    command2.ExecuteNonQuery();
+                    command2.Dispose();
+
+                    SqlCommand command3 = new SqlCommand("DROP PROCEDURE FilterLibraryOfUser" + Program.activeUserName, conn);
+                    command3.ExecuteNonQuery();
+                    command3.Dispose();
+                    conn.Close();
+                    
 
                     MessageBox.Show("Farwell " + Program.activeUserName);
 

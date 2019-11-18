@@ -45,6 +45,13 @@ namespace Webflex
         {
             Application.Exit();
         }
+
+        private void Button4_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            AllMovies ss = new AllMovies();
+            ss.Show();
+        }
     }
 
 

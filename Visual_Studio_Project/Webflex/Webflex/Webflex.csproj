@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AllMovies.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllMovies.Designer.cs">
+      <DependentUpon>AllMovies.cs</DependentUpon>
+    </Compile>
     <Compile Include="F_account.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +120,9 @@
     <Compile Include="UserLibraryList.Designer.cs">
       <DependentUpon>UserLibraryList.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AllMovies.resx">
+      <DependentUpon>AllMovies.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="F_account.resx">
       <DependentUpon>F_account.cs</DependentUpon>
     </EmbeddedResource>
