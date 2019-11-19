@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
 
+using System.IO;
+
 namespace Webflex
 {
     public partial class F_user_library : Form
@@ -62,6 +64,7 @@ namespace Webflex
                     TitleArray.Add(reader.GetString(1));
                     GenreArray.Add(reader.GetString(2));
                     PriceArray.Add(reader.GetInt32(3));
+                    
                 }
             }
             reader.Close();

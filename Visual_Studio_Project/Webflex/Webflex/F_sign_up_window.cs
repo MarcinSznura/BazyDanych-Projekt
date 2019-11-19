@@ -107,7 +107,11 @@ namespace Webflex
                 
                     if (!LoginTaken(login))
                     {
-                        string sql = "INSERT INTO Users (ID, login,password,name,surname,[e-mail],balance) VALUES('" + new_id + "', '" + login + "', '" + password + "', '" + name + "', '" + surname + "', '" + email + "', '0');";
+
+                    //AddNewUser
+                    string sql = "DECLARE @RC int EXECUTE @RC = [dbo].[AddNewUser] @id = "+new_id+",@login = '"+login+"' ,@password = '"+password + @"' ,@name = '"+name+@"'
+                                     ,@surname = '"+surname+"'  ,@mail = '"+email+"'  ,@balance = 0";
+                    //string sql = "INSERT INTO Users (ID, login,password,name,surname,[e-mail],balance) VALUES('" + new_id + "', '" + login + "', '" + password + "', '" + name + "', '" + surname + "', '" + email + "', '0');";
                         cmd = new SqlCommand(sql, conn);
                     conn.Open();
                     adapter.InsertCommand = new SqlCommand(sql, conn);
@@ -117,9 +121,6 @@ namespace Webflex
                     cmd.Dispose();
                         adapter.Dispose();
                         MessageBox.Show("Signing up successful. You can go back to main page and sign in!");
-                        CreateUserLibrary(login);
-                    CreateUserProcedureShopFilter(login);
-                    CreateUserProcedureLibraryFilter(login);
                 }
                     else MessageBox.Show("Login taken");
                
@@ -128,6 +129,18 @@ namespace Webflex
             {
                 MessageBox.Show("Fill empty fields");
             }
+        }
+
+        private void CreateUserLibraryView(string login)
+        {
+            string createUserView = "CREATE VIEW "+login+"_LibraryView AS select * from "+login+"_Library;";
+            conn.Open();
+
+            SqlCommand command = new SqlCommand(createUserView, conn);
+            command.ExecuteNonQuery();
+            command.Dispose();
+            conn.Close();
+
         }
 
         private void CreateUserProcedureLibraryFilter(string name)

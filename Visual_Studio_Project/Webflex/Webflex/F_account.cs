@@ -71,8 +71,12 @@ namespace Webflex
                     SqlCommand command3 = new SqlCommand("DROP PROCEDURE FilterLibraryOfUser" + Program.activeUserName, conn);
                     command3.ExecuteNonQuery();
                     command3.Dispose();
+
+                    SqlCommand command4 = new SqlCommand("DROP VIEW " + Program.activeUserName + "_LibraryView", conn);
+                    command4.ExecuteNonQuery();
+                    command4.Dispose();
                     conn.Close();
-                    
+
 
                     MessageBox.Show("Farwell " + Program.activeUserName);
 

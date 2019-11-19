@@ -46,6 +46,8 @@ namespace Webflex
             set { _id = value; }
         }
 
+      
+
         #endregion
 
         private void UserLibraryList_Load(object sender, EventArgs e)
@@ -59,6 +61,11 @@ namespace Webflex
         }
 
         private void LPrice_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PictureBox1_Click(object sender, EventArgs e)
         {
 
         }
