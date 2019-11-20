@@ -104,7 +104,10 @@ namespace Webflex
             List<int> UserMovies = new List<int>();
             string cmdd = "all";
             if (genre != "all")
-                cmdd = " DECLARE	@return_value int EXEC @return_value = [dbo].[FilterLibraryOfUser" + Program.activeUserName + "]  @genres = N'" + genre + "'";
+                cmdd = @" DECLARE	@return_value int
+                        EXEC @return_value = [dbo].[FilterLibrary]
+                        @login = N'"+Program.activeUserName+@"',
+		                @genres = N'"+genre+"'";
             else
                 cmdd = "select [id] from " + Program.activeUserName + "_Library where bought = 1;";
             SqlCommand cmd2 = new SqlCommand(cmdd, conn);

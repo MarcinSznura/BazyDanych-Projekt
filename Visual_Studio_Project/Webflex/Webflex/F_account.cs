@@ -54,28 +54,13 @@ namespace Webflex
                                      MessageBoxButtons.YesNo);
                 if (confirmResult2 == DialogResult.Yes)
                 {
-                    SqlCommand command = new SqlCommand("DROP TABLE "+Program.activeUserName+"_Library", conn);
+                    SqlCommand command = new SqlCommand(@"DECLARE	@return_value int
+                                                        EXEC    @return_value = [dbo].[DeleteUser]
+                                                        @login = N'"+Program.activeUserName+@"',    
+                                                        @id = N'"+Program.activeUserId+"'", conn);
                     conn.Open();
                     command.ExecuteNonQuery();
                     command.Dispose();
-                    
-                    SqlDataAdapter adapter = new SqlDataAdapter();
-                    adapter.DeleteCommand = new SqlCommand("DELETE FROM Users WHERE id ="+Program.activeUserId, conn);
-                    adapter.DeleteCommand.ExecuteNonQuery();
-                    adapter.Dispose();
-
-                    SqlCommand command2 = new SqlCommand("DROP PROCEDURE FilterShopOfUser" + Program.activeUserName, conn);
-                    command2.ExecuteNonQuery();
-                    command2.Dispose();
-
-                    SqlCommand command3 = new SqlCommand("DROP PROCEDURE FilterLibraryOfUser" + Program.activeUserName, conn);
-                    command3.ExecuteNonQuery();
-                    command3.Dispose();
-
-                    SqlCommand command4 = new SqlCommand("DROP VIEW " + Program.activeUserName + "_LibraryView", conn);
-                    command4.ExecuteNonQuery();
-                    command4.Dispose();
-                    conn.Close();
 
 
                     MessageBox.Show("Farwell " + Program.activeUserName);
