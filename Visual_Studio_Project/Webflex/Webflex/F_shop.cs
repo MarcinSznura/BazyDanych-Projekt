@@ -126,11 +126,12 @@ namespace Webflex
             SqlDataReader reader2 = cmd2.ExecuteReader();
             while (reader2.Read())
             {
-                UserMovies.Add(reader2.GetInt32(0));
+               UserMovies.Add(reader2.GetInt32(0));
             }
             conn.Close();
             reader2.Close();
             cmd2.Dispose();
+
             return UserMovies;
         }
 
@@ -138,7 +139,7 @@ namespace Webflex
         {
             for (int i = 0; i < UserMovies.Count(); i++)
             {
-                if (id == UserMovies[i]) return true;
+               if (id == UserMovies[i]) return true;
             }
             return false;
         }
