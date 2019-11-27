@@ -61,6 +61,7 @@ namespace Webflex
                     conn.Open();
                     command.ExecuteNonQuery();
                     command.Dispose();
+                    conn.Close();
 
 
                     MessageBox.Show("Farwell " + Program.activeUserName);
