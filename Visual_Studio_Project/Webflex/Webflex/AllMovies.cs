@@ -99,7 +99,7 @@ namespace Webflex
 
             Console.Write(TitleArray);
 
-           UserLibraryList[] shopListing = new UserLibraryList[20];
+           UserLibraryList[] shopListing = new UserLibraryList[21];
             for (int i = 0; i < TitleArray.Count; i++)
             {
                 string Title = TitleArray[i];

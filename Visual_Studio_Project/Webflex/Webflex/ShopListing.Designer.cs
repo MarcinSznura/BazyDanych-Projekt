@@ -32,6 +32,7 @@
             this.LGenre = new System.Windows.Forms.Label();
             this.LPrice = new System.Windows.Forms.Label();
             this.Button = new System.Windows.Forms.Button();
+            this.LMature = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LTitle
@@ -46,7 +47,7 @@
             // 
             // LGenre
             // 
-            this.LGenre.Location = new System.Drawing.Point(7, 52);
+            this.LGenre.Location = new System.Drawing.Point(4, 45);
             this.LGenre.Name = "LGenre";
             this.LGenre.Size = new System.Drawing.Size(103, 30);
             this.LGenre.TabIndex = 2;
@@ -61,6 +62,7 @@
             this.LPrice.Size = new System.Drawing.Size(35, 13);
             this.LPrice.TabIndex = 4;
             this.LPrice.Text = "label2";
+            this.LPrice.Click += new System.EventHandler(this.LPrice_Click);
             // 
             // Button
             // 
@@ -72,9 +74,20 @@
             this.Button.UseVisualStyleBackColor = true;
             this.Button.Click += new System.EventHandler(this.Button_Click);
             // 
+            // LMature
+            // 
+            this.LMature.AutoSize = true;
+            this.LMature.Location = new System.Drawing.Point(4, 62);
+            this.LMature.Name = "LMature";
+            this.LMature.Size = new System.Drawing.Size(35, 13);
+            this.LMature.TabIndex = 6;
+            this.LMature.Text = "label1";
+            this.LMature.Click += new System.EventHandler(this.LMature_Click);
+            // 
             // ShopListing
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.Controls.Add(this.LMature);
             this.Controls.Add(this.Button);
             this.Controls.Add(this.LPrice);
             this.Controls.Add(this.LGenre);
@@ -96,5 +109,6 @@
         private System.Windows.Forms.Label LGenre;
         private System.Windows.Forms.Label LPrice;
         private System.Windows.Forms.Button Button;
+        private System.Windows.Forms.Label LMature;
     }
 }

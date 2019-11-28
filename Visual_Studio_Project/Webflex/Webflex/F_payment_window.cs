@@ -55,7 +55,7 @@ namespace Webflex
 
         private void Button5_Click(object sender, EventArgs e)
         {
-            AddFundsToBalance(200);
+            AddFundsToBalance(250);
             this.Hide();
             F_add_funds ss = new F_add_funds();
             ss.Show();
@@ -78,7 +78,7 @@ namespace Webflex
 
         private void F_payment_window_Load(object sender, EventArgs e)
         {
-
+            CenterToParent();
         }
 
 
@@ -92,6 +92,7 @@ namespace Webflex
             adapter.UpdateCommand.ExecuteNonQuery();
             conn.Close();
             cmd.Dispose();
+            adapter.Dispose();
             return balance;
         }
 

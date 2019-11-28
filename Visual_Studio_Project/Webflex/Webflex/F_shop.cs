@@ -65,9 +65,10 @@ namespace Webflex
             List<string> TitleArray = new List<string>();
             List<string> GenreArray = new List<string>();
             List<int> PriceArray = new List<int>();
+            List<string> MatureArray = new List<string>();
 
                         conn.Open();
-            SqlCommand cmd = new SqlCommand("SELECT [id],[title],[genres],[price] FROM [Webflex].[dbo].[Movies]", conn);
+            SqlCommand cmd = new SqlCommand("SELECT [id],[title],[genres],[maturity ratings],[price] FROM [Webflex].[dbo].[Movies]", conn);
             SqlDataReader reader = cmd.ExecuteReader();
             if (reader.HasRows)
             {
@@ -76,7 +77,8 @@ namespace Webflex
                     IDArray.Add(reader.GetInt32(0));
                     TitleArray.Add(reader.GetString(1));
                     GenreArray.Add(reader.GetString(2));
-                    PriceArray.Add(reader.GetInt32(3));
+                    MatureArray.Add(reader.GetString(3));
+                    PriceArray.Add(reader.GetInt32(4));
                 }
             }
             reader.Close();
@@ -86,18 +88,20 @@ namespace Webflex
             Console.Write(TitleArray);
 
             List<int> UserMovies = GetUserMovies(genre);
-            ShopListing[] shopListing = new ShopListing[20];
+            ShopListing[] shopListing = new ShopListing[21];
             for(int i = 0; i < TitleArray.Count; i++)
             {
                 string Title = TitleArray[i];
                 string Genre = GenreArray[i];
                 int Price = PriceArray[i];
                 int Id = IDArray[i];
+                string Mature = MatureArray[i];
                 shopListing[i] = new ShopListing();
                 shopListing[i].Title = Title;
                 shopListing[i].Genre = Genre;
                 shopListing[i].Price = Price;
                 shopListing[i].Id = Id;
+                shopListing[i].Mature = Mature;
 
                 if (flowLayoutPanel1.Controls.Count < 0)
                 {
@@ -117,7 +121,7 @@ namespace Webflex
             List<int> UserMovies = new List<int>();
             string cmdd = "all";
             if (genre != "all")
-                cmdd = " DECLARE	@return_value int EXEC @return_value = [dbo].[FilterShopOfUser" + Program.activeUserName + "]  @genres = N'" + genre + "'";
+                cmdd = "DECLARE	@return_value int EXEC @return_value = [dbo].[FilterShop] @genres = N'" + genre + "', @login = N'" + Program.activeUserName + "'";
             else
                 cmdd = "select [id] from " + Program.activeUserName + "_Library where bought = 0;";
 

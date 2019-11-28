@@ -30,6 +30,7 @@ namespace Webflex
         private string _genre;
         private int _price;
         private int _id;
+        private string _mature;
 
         [Category("Custom Props")]
         public string Title
@@ -43,6 +44,13 @@ namespace Webflex
         {
             get { return _genre; }
             set { _genre = value; LGenre.Text = value; }
+        }
+
+        [Category("Custom Props")]
+        public string Mature
+        {
+            get { return _mature; }
+            set { _mature = value; LMature.Text = "Rated: "+value; }
         }
 
         [Category("Custom Props")]
@@ -90,12 +98,20 @@ namespace Webflex
 
         private void BuyAMovie(int id,decimal howMuch)
         {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("UPDATE Users SET balance = balance - " + howMuch + " WHERE id = " + Program.activeUserId + "; UPDATE " + Program.activeUserName + "_Library set bought = 1 WHERE id =" + id);
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                adapter.UpdateCommand = new SqlCommand("UPDATE Users SET balance = balance - " + howMuch + " WHERE id = " + Program.activeUserId + "; UPDATE " + Program.activeUserName + "_Library set bought = 1 WHERE id =" + id, conn);
-                adapter.UpdateCommand.ExecuteNonQuery();
-                conn.Close();
+                string sql = @"DECLARE @return_value int
+
+EXEC    @return_value = [dbo].[BuyingMovieTransaction]
+
+        @login = N'" + Program.activeUserName + @"',
+        @cost = "+howMuch+@",
+        @userID = "+Program.activeUserId+@",
+        @movieID = N'"+id+"'";
+            SqlCommand cmd = new SqlCommand(sql,conn);
+            conn.Open();
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            adapter.InsertCommand = new SqlCommand(sql, conn);
+            adapter.InsertCommand.ExecuteNonQuery();
+            conn.Close();
                 cmd.Dispose();
                 adapter.Dispose();
         }
@@ -118,5 +134,14 @@ namespace Webflex
             return balance;
         }
 
+        private void LPrice_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LMature_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
