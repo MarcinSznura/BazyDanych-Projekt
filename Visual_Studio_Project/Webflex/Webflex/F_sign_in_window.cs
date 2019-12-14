@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -63,12 +64,19 @@ namespace Webflex
             SqlDataReader reader = cmd.ExecuteReader()
             )
             {
+
+                var data = Encoding.ASCII.GetBytes(textBox2.Text);
+                var sha1 = new SHA1CryptoServiceProvider();
+                var sha1data = sha1.ComputeHash(data);
+                
+
                 string user_login = textBox1.Text;
-                string password = textBox2.Text;
+                string password = Convert.ToBase64String(sha1data).Substring(0, 20);
 
                 bool wrong_password = true;
                 while (reader.Read())
                 {
+                                        
                     if (user_login == reader.GetString(0) && password == reader.GetString(1))
                     {
                         wrong_password = false;

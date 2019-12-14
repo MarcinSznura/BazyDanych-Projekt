@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -90,15 +91,18 @@ namespace Webflex
 
         private void Button1_Click(object sender, EventArgs e)
         {
+            var data = Encoding.ASCII.GetBytes(textBox2.Text);
+            var sha1 = new SHA1CryptoServiceProvider();
+            var sha1data = sha1.ComputeHash(data);
+
             string login = textBox1.Text;
-            string password = textBox2.Text;
+            string password = Convert.ToBase64String(sha1data);
             string name = textBox3.Text;
             string surname = textBox4.Text;
             string email = textBox5.Text;
 
             if (login != "" && password != "" && name != "" && surname != "" && email != "")
             {
-
                 SqlCommand cmd;
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 int new_id = 0;
