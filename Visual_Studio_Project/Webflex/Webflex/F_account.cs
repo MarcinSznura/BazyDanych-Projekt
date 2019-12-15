@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -78,8 +79,12 @@ namespace Webflex
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            password_chcek = textBox4.Text;
-            newmail1 = textBox5.Text;
+
+            newmail1 = textBox5.Text;            var data = Encoding.ASCII.GetBytes(textBox4.Text);
+            var sha1 = new SHA1CryptoServiceProvider();
+            var sha1data = sha1.ComputeHash(data);
+
+            password_chcek = Convert.ToBase64String(sha1data).Substring(0, 20);
             newmail2 = textBox6.Text;
             if (password == password_chcek)
             {
@@ -87,7 +92,16 @@ namespace Webflex
                 {
                     ChangeEmail(newmail1);
                     email = newmail1;
+                    MessageBox.Show("Email changed.");
                 }
+                else
+                {
+                    MessageBox.Show("New email does not match");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Wrong credentials");
             }
         }
 
@@ -104,16 +118,33 @@ namespace Webflex
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            oldpass = textBox1.Text;
+            var data = Encoding.ASCII.GetBytes(textBox1.Text);
+            var sha1 = new SHA1CryptoServiceProvider();
+            var sha1data = sha1.ComputeHash(data);
+
+            oldpass = Convert.ToBase64String(sha1data).Substring(0, 20);
             newpass1 = textBox2.Text;
             newpass2 = textBox3.Text;
             if (oldpass == password)
             {
                 if (newpass1 == newpass2)
                 {
-                    ChangePassword(newpass1);
-                    password = newpass1;
+                    var data_New = Encoding.ASCII.GetBytes(newpass1);
+                    var sha1_New = new SHA1CryptoServiceProvider();
+                    var sha1data_New = sha1_New.ComputeHash(data_New);
+                    string password_New = Convert.ToBase64String(sha1data_New).Substring(0, 20);
+
+                    ChangePassword(password_New);
+                    password = password_New;
+                    MessageBox.Show("Password changed.");
+                } else 
+                {
+                    MessageBox.Show("New password does not match");
                 }
+            }
+            else
+            {
+                MessageBox.Show("Wrong credentials");
             }
         }
 
