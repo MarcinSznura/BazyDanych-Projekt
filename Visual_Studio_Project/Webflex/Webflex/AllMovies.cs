@@ -81,6 +81,7 @@ namespace Webflex
                     view = "SELECT [id],[title],[genres],[price] FROM [Webflex].[dbo].[Movies]";
                     break;
             }
+
             SqlCommand cmd = new SqlCommand(view, conn);
             SqlDataReader reader = cmd.ExecuteReader();
             if (reader.HasRows)
@@ -119,17 +120,6 @@ namespace Webflex
                     flowLayoutPanel1.Controls.Add(shopListing[i]);
 
             }
-        }
-
-       
-
-        private bool IsInLibrary(int id, List<int> UserMovies)
-        {
-            for (int i = 0; i < UserMovies.Count(); i++)
-            {
-                if (id == UserMovies[i]) return true;
-            }
-            return false;
         }
 
         private void AllMovies_Load(object sender, EventArgs e)
